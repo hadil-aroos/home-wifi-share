@@ -1,0 +1,13 @@
+[Unit]
+Description=Phone link (Cloudflare quick tunnel) for a local app on port @PORT@
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=@USER@
+ExecStart=/usr/bin/cloudflared tunnel --no-autoupdate --metrics 127.0.0.1:20241 --url http://127.0.0.1:@PORT@
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
